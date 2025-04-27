@@ -97,7 +97,7 @@ export default {
         });
         this.$store.dispatch("fetchAllPosts");
         this.$store.dispatch("setreFreshPageButton", true);
-        this.$router.replace("/blog");
+        this.$router.replace("/");
       } else {
         console.error("User not authenticated.");
       }

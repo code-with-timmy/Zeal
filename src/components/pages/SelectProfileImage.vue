@@ -145,7 +145,7 @@ export default {
         const userRef = ref(db, `users/${uid}/profile`);
         await update(userRef, { image: this.selectedImg });
 
-        this.$router.replace("/blog");
+        this.$router.replace("/");
       } catch (error) {
         console.error("Error updating nickname:", error);
       }

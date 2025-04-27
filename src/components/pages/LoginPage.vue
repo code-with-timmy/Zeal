@@ -37,7 +37,6 @@
           class="bg-primary rounded-md h-12 text-secondary p-3 outline-none border border-dark active:border-secondary focus:border-secondary"
         />
       </div>
-      <p v-if="errorMsg" class="text-[0.8rem] text-red-600">{{ errorMsg }}</p>
 
       <div class="flex justify-between">
         <div class="flex gap-2">
@@ -51,7 +50,7 @@
           <p class="text-[0.82rem]">Forgotten Password?</p>
         </div>
       </div>
-
+      <p v-if="errorMsg" class="text-[0.8rem] text-red-600">{{ errorMsg }}</p>
       <div>
         <button
           type="submit"
@@ -115,22 +114,17 @@ export default {
         this.$router.replace("/blog");
         this.showLoader = false;
       } catch (error) {
+        this.showLoader = false;
         const errorCode = error.code;
-        const errorMessage = error.message;
+
         if (errorCode === "auth/argument-error") {
           this.errorMsg = "missing email/password";
-          console.error("Argument error:", errorMessage);
-        } else if (errorCode === "auth/wrong-password") {
+        }
+        if (errorCode === "auth/wrong-password") {
           this.errorMsg = "invalid password";
-          console.error("Wrong password:", errorMessage);
-        } else if (errorCode === "auth/user-not-found") {
+        }
+        if (errorCode === "auth/user-not-found") {
           this.errorMsg = "user not found";
-          console.error("User not found:", errorMessage);
-        } else if (errorCode === "auth/invalid-email") {
-          this.errorMsg = "try again later";
-          console.error("Invalid email:", errorMessage);
-        } else {
-          console.error("Unknown error:", errorMessage);
         }
       }
     },
